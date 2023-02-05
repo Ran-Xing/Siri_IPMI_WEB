@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-git clone https://github.com/Ran-Xing/Siri_IPMI_WEB.git
+git clone https://github.com/XRSec/Siri_IPMI_WEB.git
 cd Siri_IPMI_WEB
 ```
 
