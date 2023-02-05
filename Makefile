@@ -4,5 +4,5 @@ build:
 
 install:
 	@cp siri-ipmi-web.service /etc/systemd/system/siri-ipmi-web.service
-	systemctl enable siri-ipmi-web.service
-	systemctl start siri-ipmi-web.service
+	@systemctl enable siri-ipmi-web.service
+	@systemctl start siri-ipmi-web.service
