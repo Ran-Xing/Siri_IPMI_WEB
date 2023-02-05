@@ -1,0 +1,9 @@
+[Unit]
+Description=Start the ipmi web server
+After=default.target
+
+[Service]
+ExecStart=/usr/local/bin/siri-ipmi-web
+
+[Install]
+WantedBy=default.target
