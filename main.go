@@ -14,6 +14,7 @@ var (
 	USER      = "admin"
 	PASSWORD  = "admin"
 	IPADDRESS = "passwd"
+	MAC       = "CF:A8:59:57:67:A5"
 	TOKEN     = "hhTp5eUSsc7iS5"
 )
 
@@ -31,6 +32,9 @@ func init() {
 	}
 	if temp = os.Getenv("IPADDRESS"); temp != "" {
 		IPADDRESS = temp
+	}
+	if temp = os.Getenv("MAC"); temp != "" {
+		MAC = temp
 	}
 }
 
@@ -57,6 +61,25 @@ func main() {
 			return
 		}
 		c.String(http.StatusOK, fmt.Sprintf("power %v success with %v", typeTmp, string(out)))
+	})
+	cli.GET("/powerRouter", func(c *gin.Context) {
+		typeTmp := c.Query("type")
+		if typeTmp == "" {
+			c.String(http.StatusBadGateway, "Server error!")
+			return
+		}
+		if typeTmp != "on" {
+			c.String(http.StatusBadGateway, "Server error!")
+			return
+		}
+		cmd := exec.Command("wakeonlan", MAC)
+		_, err := cmd.CombinedOutput()
+		if err != nil {
+			log.Errorf("power %v failed with %s\n", typeTmp, err)
+			c.String(http.StatusBadRequest, fmt.Sprintf("power %v failed with %v", typeTmp, err))
+			return
+		}
+		c.String(http.StatusOK, "powerRouter on success")
 	})
 	r.GET("/fan", func(c *gin.Context) {
 		//	ipmitool -I lan -U USER -P PASSWD -H IPADDRESS raw 0x30 0x70 0x66 0x01 0x01 0x20
