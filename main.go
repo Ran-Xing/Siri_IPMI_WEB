@@ -12,8 +12,8 @@ import (
 
 var (
 	USER      = "admin"
-	PASSWORD  = "admin"
-	IPADDRESS = "passwd"
+	PASSWORD  = "passwd"
+	IPADDRESS = "192.168.0.1"
 	MAC       = "CF:A8:59:57:67:A5"
 	TOKEN     = "hhTp5eUSsc7iS5"
 )
